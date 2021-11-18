@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">	</head>
+	<body>
+	<nav>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Mudi</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Todos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Aguardando</a>
+        </li>
+           </li>
+        <li class="nav-item">
+          <a onclick="document.querySelector('#form-login').submit()" class="nav-link" sec:authorize="isAuthenticated()" href="#">logout</a>
+          <form id="form-login" th:action="@{/logout}" method="post"></form>
+        </li>
+      <form class="d-flex">
+        <a href = "/pedido/formulario" button class="btn btn-outline-success" >Novo Pedido</a>
+      </form>
+    </div>
+  </div>
+</nav>
+	</nav>
+		<div class="container">
+			<div class="card" th:each="pedido : ${pedidos}">
+				<div class="card-header" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">
+							<div class="row ">
+								<div class="col-md-5">Valor: <span th:text="${pedido.valorNegociado}">200,99</span></div>
+								<div class="col-md-6">Data da entrega: <span th:text="${pedido.dataDaEntrega}">10/02/2020</span></div>
+							</div>
+							
+							<div>Produto</div> 
+							<div> <input class="form-control" th:value="${pedido.urlProduto}" value="url do produto" /></div>
+							
+							<div>Descrição</div>
+							<div>
+								<textarea class="form-control" th:text="${pedido.descricao}">descrição do pedido</textarea>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div>
+								<img class="img-thumbnail" th:src="${pedido.urlImagem}" src="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
